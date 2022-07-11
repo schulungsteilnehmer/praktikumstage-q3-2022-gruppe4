@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
 class Lesen {
-    private String name;
-    private String datum;
-
     public Fach[] datenEinlesen() {
         Fach[] fi = new Fach[8];
         Scanner sc = new Scanner(System.in);
@@ -21,22 +18,5 @@ class Lesen {
         }
         sc.close();
         return fi;
-    }
-
-    public void metaEinlesen() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Name: ");
-        name = sc.nextLine();
-        System.out.println("Datum: ");
-        datum = sc.nextLine();
-        sc.close();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDatum() {
-        return datum;
     }
 }
