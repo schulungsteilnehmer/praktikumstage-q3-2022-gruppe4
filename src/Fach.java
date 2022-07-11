@@ -1,16 +1,16 @@
 class Fach {
-    boolean lk;
-    String name;
-    int note;
+    private boolean lk;
+    private String fach;
+    private int note;
 
     public Fach(String name, boolean lk, int note) {
         this.lk = lk;
-        this.name = name;
+        this.fach = name;
         this.note = note;
     }
 
-    public String getName() {
-        return name;
+    public String getFach() {
+        return fach;
     }
 
     public boolean getLk() {
@@ -22,6 +22,3 @@ class Fach {
     }
 
 }
-
-
-
