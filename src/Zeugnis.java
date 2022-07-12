@@ -1,55 +1,110 @@
-public class Zeugnis {
-    private int ges = 0;
-    private double schnitt;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+class Fach {
+    private boolean lk;
+    private String fachname;
     private int note;
-    private boolean versetzung;
+
+    public Fach(String name, boolean lk, int note) {
+        this.lk = lk;
+        this.fachname = name;
+        this.note = note;
+    }
+
+    public String getName() {
+        return fachname;
+    }
+
+    public boolean getLk() {
+        return lk;
+    }
+
+    public int getNote() {
+        return note;
+    }
+}
+
+public class Zeugnis {
+    private String schueler;
+    private String datum;
+    private int fehltage;
+    private int entschuldigt;
+    private int unentschuldigt;
 
     public Zeugnis() {
+        setSchueler();
+        setDatum();
 
+        System.out.println("Anzahl der Fehltage: ");
+        fehltage = Integer.parseInt(Main.sc.nextLine());
+
+        System.out.println("Anzahl davon Entschuldigt: ");
+        entschuldigt = Integer.parseInt(Main.sc.nextLine());
+
+        unentschuldigt = fehltage - entschuldigt;
     }
 
-    public double berechneSchnitt(Fach[] faecher) {
-        int zaehler = 0;
-        for (int i = 0; i < 8; i++) {
-            if (faecher[i].getLk()) {
-                note = faecher[i].getNote() * 2;
-            } else {
-                note = faecher[i].getNote();
-            }
-            if (faecher[i].getNote() < 6) {
-                zaehler++;
-            }
-            ges += note;
-        }
+    // Getter
 
-        if (zaehler > 2) {
-            versetzung = false;
-        } else {
-            versetzung = true;
-        }
-        double x = ges / 10;
-        double schnitt1 = (17 - x) / 3;
-        schnitt = Math.round(10.0 * schnitt1) / 10.0;
-        return schnitt;
+    public String getSchueler() {
+        return schueler;
     }
 
-    public void konsolenAusgabe(Fach[] faecher, Schuler s) {
-        int ufehltage = s.getFehltage() - s.getEfehltage();
-        System.out.println("Name des Schülers: " + s.getName());
-        System.out.println("Zeugnisausstellungsdatum: " + s.getDatum());
-        System.out.println("Fehltage: " + s.getFehltage());
-        System.out.println("davon unentschuldigte Fehltage: " + ufehltage);
-        for (int i = 0; i < 8; i++) {
-            System.out.println(faecher[i].getFach() + ": " + faecher[i].getNote());
-        }
-        System.out.println("Notendurchschnitt: " + schnitt);
-        if (ufehltage >= 30) {
-            versetzung = false;
-        }
-        if (versetzung) {
-            System.out.println("Der Schüler wird versetzt");
-        } else {
-            System.out.println("Der Schüler wird nicht versetzt");
+    public String getDatum() {
+        return datum;
+    }
+
+    public int getFehltage() {
+        return fehltage;
+    }
+
+    public int getEntschuldigt() {
+        return entschuldigt;
+    }
+
+    public int getUnentschuldigt() {
+        return unentschuldigt;
+    }
+
+    // Setter
+
+    public void setSchueler() {
+        String str;
+        do {
+            System.out.println("Name des Schülers: ");
+            str = Main.sc.nextLine();
+        } while (!testSchueler(str));
+        schueler = str;
+    }
+
+    public void setDatum() {
+        String str;
+        do {
+            System.out.println("Datum der Zeugnisausgabe: ");
+            str = Main.sc.nextLine();
+        } while (!testDatum(str));
+        datum = str;
+    }
+
+    // Prüfung
+
+    private boolean testSchueler(String name) {
+        Pattern pattern = Pattern.compile("^[a-zäöüß \\-]+$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+        Matcher matcher = pattern.matcher(name);
+        return matcher.find();
+    }
+
+    private boolean testDatum(String datum) {
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        df.setLenient(false);
+        try {
+            df.parse(datum);
+            return true;
+        } catch (ParseException e) {
+            return false;
         }
     }
 }
