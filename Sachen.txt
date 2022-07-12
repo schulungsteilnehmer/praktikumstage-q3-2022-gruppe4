@@ -1,0 +1,33 @@
+Array durchsuchen: Arrays.asList(yourArray).contains(yourValue)
+
+public class Farben {
+    private Map<Color, String> encode = new HashMap<>();
+    private Map<String, Color> decode = new HashMap<>();
+
+    public Farben(boolean schalter) {
+        if (schalter) {
+            setColorByteEncode();
+        } else {
+            setColorEncode();
+        }
+        
+        setColorDecode();
+    }
+
+    public String getCode(Color c) {
+        return encode.get(c);
+    }
+
+    public Color getColor(String c) {
+        return decode.get(c);
+    }
+
+    public void setColorByteEncode(){
+        encode.put(Color.RED, "100");
+        encode.put(Color.GREEN, "010");
+        encode.put(Color.BLUE, "001");
+        encode.put(Color.YELLOW, "110");
+        encode.put(Color.WHITE, "000");
+        encode.put(Color.BLACK, "111");
+    }
+}

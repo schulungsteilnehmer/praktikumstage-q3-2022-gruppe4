@@ -1,0 +1,22 @@
+Name des Schulers: A
+Zeugnisausstellung: 17.07.2022
+
+Fehltage: 20
+davon unentschuldigt: 1
+
+Mathe(LK): 12
+Informatik(LK): 8
+Erdkunde: 14
+Physik: 4
+Englisch: 1
+Sport: 15
+Geschichte: 3
+Darstellendes Spiel: 15
+
+
+
+
+
+Notendurchschnitt: 2.6
+
+Der Schuler wird nicht versetzt.
